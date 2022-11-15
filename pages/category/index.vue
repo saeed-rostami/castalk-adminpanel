@@ -32,7 +32,6 @@ export default {
       }
     });
     this.categories = data.data.data;
-    console.log(this.categories);
   }
 };
 </script>
