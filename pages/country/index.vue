@@ -1,28 +1,24 @@
 <template>
-  <!--    <v-flex>-->
+
   <v-container>
     <p v-if="$fetchState.pending">
       <Preloading/>
     </p>
-    <v-row>
-      <v-flex xs12 sm8 md6 lg3
-              v-for="country in countries"
-              v-bind:key="country.id">
-        {{country.nic_name}}
-      </v-flex>
 
+    <Country v-bind:countries="countries" />
 
-    </v-row>
   </v-container>
-  <!--    </v-flex>-->
+
 </template>
 
 <script>
 
   import Preloading from "../../components/UI/Preloading";
+  import Country from "~/components/Country/country";
+
 
   export default {
-    components: {Preloading},
+    components: {Country, Preloading},
     name: "index",
     data() {
       return {
@@ -31,7 +27,11 @@
     },
 
     async fetch() {
-      const data = await this.$axios.$get('https://api.services.castalk.dyneemadev.com/api/rest/Castalk/CountryIndex');
+      const data = await this.$axios.$get(process.env.baseUrl+`CountryAdminPage/list`, {
+        headers: {
+          "authorization": process.env.token
+        }
+      });
       this.countries = data.data;
     }
   };

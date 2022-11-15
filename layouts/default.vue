@@ -111,6 +111,12 @@ export default {
           title: 'Category',
           to: '/category'
         },
+
+        {
+          icon: 'mdi-apps',
+          title: 'Podcast',
+          to: '/podcast'
+        },
       ],
       miniVariant: false,
       right: true,

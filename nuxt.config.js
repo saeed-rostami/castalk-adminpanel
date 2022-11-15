@@ -1,6 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  env: {
+    baseUrl: "https://api.services.castalk.dyneemadev.com/api/admin/",
+    token : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLnNlcnZpY2VzLmNhc3RhbGsuZHluZWVtYWRldi5jb21cL2FwaVwvcmVzdFwvQWRtaW5cL0FkbWluTG9naW4iLCJpYXQiOjE2Njg1MDYyNDEsImV4cCI6MTY2ODUwOTg0MSwibmJmIjoxNjY4NTA2MjQxLCJqdGkiOiJ1NHNuMHlIcndVN1c4eGxmIiwic3ViIjowLCJwcnYiOiI2MDVmOGJiODgxOGZlZDRiNDExZjZmYmRjYWRlMjg3Y2QzNmU4MTAwIn0.mB0JAwx7MBNCyMeT2a-VRqXBBOvwaWMkCxXzkDWvS5s"
+  },
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -60,7 +64,8 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
