@@ -59,6 +59,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
   /*
   ** Axios module configuration
@@ -95,5 +96,40 @@ export default {
   },
 
 
-  loading: {color: 'yellow darken-3', duration: '5000', height: '4px'},
+  loading: {color: '#aeb12c', duration: '5000', height: '4px'},
+
+  router: {
+    middleware: ['auth']
+  },
+  /*
+   ** Nuxt auth config
+   */
+  auth: {
+    redirect: {
+      login: '/auth',
+      // user: '/',
+      logout: '/auth',
+    },
+
+    loggedIn:true,
+    strategies: {
+      local: {
+        token: {
+          property: 'data.access_token',
+          global: true,
+          // required: true,
+          type: 'Bearer'
+        },
+        user: {
+          property: "data",
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminLogin', method: 'post' , propertyName: 'data.access_token'},
+          logout: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminLogout', method: 'post' },
+          user: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminCurrent', method: 'get' , propertyName: 'data'}
+        },
+      }
+    }
+  }
 }

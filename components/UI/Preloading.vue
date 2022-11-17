@@ -7,7 +7,10 @@
   export default {
     name: "PreLoading",
     created() {
-      Notiflix.Loading.dots()
+      // Notiflix.Loading.dots();
+        Notiflix.Loading.dots({
+            svgColor: '#b1a600',
+        });
     },
     beforeDestroy() {
       Notiflix.Loading.remove();
