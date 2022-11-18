@@ -11,17 +11,52 @@
     >
       Castalk
     </v-flex>
+    <v-row>
+      <v-col>
+        chart
+        <Line :chartData="chartData"/>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+  import { Line } from "vue-chartjs";
+  import {Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js';
 
-export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  }
-}
+
+  Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+  import Logo from '~/components/Logo.vue';
+  import VuetifyLogo from '~/components/VuetifyLogo.vue';
+  import LineChart from "../components/Charts/LineChart";
+
+  export default {
+    components: {
+      Line,
+      LineChart,
+      Logo,
+      VuetifyLogo
+    },
+
+    data() {
+      return {
+        chartData: {
+          labels: [ 'January', 'February', 'March'],
+          datasets: [
+            {
+              label: 'Data One',
+              backgroundColor: '#f87979',
+              data: [40, 20, 12]
+            }
+          ]
+        },
+
+        chartOptions: {
+          maintainAspectRatio: false,
+          responsive: true
+
+        }
+      };
+    },
+  };
 </script>

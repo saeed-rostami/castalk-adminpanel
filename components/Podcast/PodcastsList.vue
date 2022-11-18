@@ -24,9 +24,9 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              outlined
               dark
-              class="mb-2"
+              class="mb-2 castalk--text"
               v-bind="attrs"
               v-on="on"
             >
@@ -146,6 +146,7 @@
         // {text: 'Cover', value: 'cover'},
         {text: 'Financial Status', value: 'financial_status'},
         {text: 'Explicit', value: 'is_adult'},
+        {text: 'Created At', value: 'created_at'},
         {text: 'Actions', value: 'actions', sortable: false},
       ],
       editedIndex: -1,

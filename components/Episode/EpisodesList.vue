@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="countries"
+    :items="episodes"
     sort-by="calories"
     class="elevation-1"
   >
@@ -11,7 +11,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Countries</v-toolbar-title>
+        <v-toolbar-title>Episodes</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -25,13 +25,12 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               outlined
-              disabled
               dark
               class="mb-2 castalk--text"
               v-bind="attrs"
               v-on="on"
             >
-              New Country
+              New Episode
             </v-btn>
           </template>
           <v-card>
@@ -48,7 +47,7 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="editedItem.title"
+                      v-model="editedItem.name"
                       label="Dessert name"
                     ></v-text-field>
                   </v-col>
@@ -126,7 +125,7 @@
 <script>
   export default {
     props: {
-      countries: {
+      episodes: {
         required: true,
         type: Array,
       }
@@ -140,33 +139,25 @@
         {
           align: 'start',
           sortable: false,
-          value: 'name',
+          // value: 'name',
         },
         {text: '#', value: 'id'},
-        {text: 'Title', value: 'title'},
-        {text: 'Iso', value: 'iso'},
-        {text: 'Nic Name', value: 'nic_name'},
-        {text: 'iso3', value: 'iso3'},
-        {text: 'Number Code', value: 'num_code'},
-        {text: 'Activation', value: 'is_active'},
+        {text: 'Name', value: 'name'},
+        {text: 'Podcast Title', value: 'podcast_title'},
+        // {text: 'Cover', value: 'cover'},
+        {text: 'Financial Status', value: 'financial_status'},
+        {text: 'Explicit', value: 'is_adult'},
+        {text: 'Created At', value: 'created_at_diff'},
         {text: 'Actions', value: 'actions', sortable: false},
       ],
       editedIndex: -1,
       editedItem: {
-        title: '',
-        iso: '',
-        nic_name: '',
-        iso3: '',
-        num_code: '',
-        is_active: '',
+        name: '',
+        cover: '',
       },
       defaultItem: {
-        title: '',
-        iso: '',
-        nic_name: '',
-        iso3: '',
-        num_code: '',
-        is_active: '',
+        name: '',
+        cover: '',
       },
     }),
 
@@ -186,25 +177,25 @@
     },
 
     mounted () {
-      console.log(this.countries);
+      console.log(this.episodes);
     },
 
     methods: {
 
       editItem (item) {
-        this.editedIndex = this.countries.indexOf(item)
+        this.editedIndex = this.episodes.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.countries.indexOf(item)
+        this.editedIndex = this.episodes.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.countries.splice(this.editedIndex, 1)
+        this.episodes.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -226,9 +217,9 @@
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.countries[this.editedIndex], this.editedItem)
+          Object.assign(this.episodes[this.editedIndex], this.editedItem)
         } else {
-          this.countries.push(this.editedItem)
+          this.episodes.push(this.editedItem)
         }
         this.close()
       },

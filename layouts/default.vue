@@ -48,7 +48,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"/>
+      <v-toolbar-title class="castalk--text" v-text="title"/>
       <v-spacer/>
       <v-btn
         icon
@@ -96,7 +96,7 @@
           exact
         >
 
-          <v-btn v-on:click="logout">
+          <v-btn v-on:click="logout" class="castalk--text">
             Logout
           </v-btn>
         </v-list-item>
@@ -106,7 +106,8 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }} Castalk App</span>
+      <v-img src="/icon.svg.svg" max-height="30" max-width="30"></v-img>
+      <span class="castalk--text">Castalk App {{ new Date().getFullYear() }} </span>
     </v-footer>
   </v-app>
 </template>
@@ -202,7 +203,9 @@
 
     methods: {
       async logout() {
-        Notiflix.Loading.circle();
+        Notiflix.Loading.circle({
+          svgColor: '#FFB800',
+        });
          this.$auth.logout()
            .then(() => {
              Notiflix.Loading.remove();

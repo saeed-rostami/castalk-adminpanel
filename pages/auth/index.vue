@@ -1,5 +1,9 @@
 <template>
-<v-flex>
+<v-flex   xs12
+          sm8
+          md6>
+  <v-img src="/icon.svg.svg" max-height="100" max-width="100"></v-img>
+
   <v-form
     v-if="!$auth.loggedIn"
     ref="form"
@@ -8,6 +12,7 @@
   >
 
     <v-text-field
+      rounded
       v-model="email"
       :rules="emailRules"
       label="E-mail"
@@ -16,6 +21,7 @@
     ></v-text-field>
 
     <v-text-field
+      rounded
       v-model="password"
       :counter="10"
       :rules="passwordRules"
@@ -89,7 +95,9 @@
 
     methods: {
       async validate() {
-        Notiflix.Loading.circle();
+        Notiflix.Loading.circle({
+          svgColor: '#FFB800',
+        });
         // this.$refs.form.validate()
         await this.$auth.loginWith("local", {
           data: {
@@ -98,7 +106,6 @@
           }
         }).then(res => {
           Notiflix.Loading.remove();
-          this.$router.push("/");
         }).catch(error => {
           Notiflix.Loading.remove();
           console.log(error);

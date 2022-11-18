@@ -30,9 +30,9 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              outlined
               dark
-              class="mb-2"
+              class="mb-2 castalk--text"
               v-bind="attrs"
               v-on="on"
             >

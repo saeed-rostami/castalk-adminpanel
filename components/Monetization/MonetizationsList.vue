@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="countries"
+    :items="monetizations"
     sort-by="calories"
     class="elevation-1"
   >
@@ -11,7 +11,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Countries</v-toolbar-title>
+        <v-toolbar-title>Monetizations</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -24,14 +24,14 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              outlined
               disabled
+              outlined
               dark
               class="mb-2 castalk--text"
               v-bind="attrs"
               v-on="on"
             >
-              New Country
+              New Monetization
             </v-btn>
           </template>
           <v-card>
@@ -48,7 +48,7 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="editedItem.title"
+                      v-model="editedItem.name"
                       label="Dessert name"
                     ></v-text-field>
                   </v-col>
@@ -126,7 +126,7 @@
 <script>
   export default {
     props: {
-      countries: {
+      monetizations: {
         required: true,
         type: Array,
       }
@@ -140,33 +140,23 @@
         {
           align: 'start',
           sortable: false,
-          value: 'name',
+          // value: 'name',
         },
         {text: '#', value: 'id'},
-        {text: 'Title', value: 'title'},
-        {text: 'Iso', value: 'iso'},
-        {text: 'Nic Name', value: 'nic_name'},
-        {text: 'iso3', value: 'iso3'},
-        {text: 'Number Code', value: 'num_code'},
-        {text: 'Activation', value: 'is_active'},
+        {text: 'Host Name', value: 'user_info.display_name'},
+        {text: 'Host Email', value: 'user_info.email'},
+        {text: 'Status', value: 'status'},
+        {text: 'Created At', value: 'created_at'},
         {text: 'Actions', value: 'actions', sortable: false},
       ],
       editedIndex: -1,
       editedItem: {
-        title: '',
-        iso: '',
-        nic_name: '',
-        iso3: '',
-        num_code: '',
-        is_active: '',
+        name: '',
+        cover: '',
       },
       defaultItem: {
-        title: '',
-        iso: '',
-        nic_name: '',
-        iso3: '',
-        num_code: '',
-        is_active: '',
+        name: '',
+        cover: '',
       },
     }),
 
@@ -186,25 +176,25 @@
     },
 
     mounted () {
-      console.log(this.countries);
+      console.log(this.monetizations);
     },
 
     methods: {
 
       editItem (item) {
-        this.editedIndex = this.countries.indexOf(item)
+        this.editedIndex = this.monetizations.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.countries.indexOf(item)
+        this.editedIndex = this.monetizations.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.countries.splice(this.editedIndex, 1)
+        this.monetizations.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -226,9 +216,9 @@
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.countries[this.editedIndex], this.editedItem)
+          Object.assign(this.monetizations[this.editedIndex], this.editedItem)
         } else {
-          this.countries.push(this.editedItem)
+          this.monetizations.push(this.editedItem)
         }
         this.close()
       },
