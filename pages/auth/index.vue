@@ -2,7 +2,7 @@
 <v-flex   xs12
           sm8
           md6>
-  <v-img src="/icon.svg.svg" max-height="100" max-width="100"></v-img>
+  <v-img src="/icon.png" max-height="100" max-width="100"></v-img>
 
   <v-form
     v-if="!$auth.loggedIn"
@@ -56,17 +56,6 @@
     </v-btn>
   </v-form>
 
-  <v-row v-if="$auth.loggedIn">
-    <v-col>
-     <h3>
-       {{$auth.user.name}}
-     </h3>
-
-      <h3>
-        {{$auth.user.email}}
-      </h3>
-    </v-col>
-  </v-row>
 </v-flex>
 </template>
 

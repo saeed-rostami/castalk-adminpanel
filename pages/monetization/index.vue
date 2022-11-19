@@ -28,7 +28,6 @@
           }
         });
         this.monetizations = data.data.data;
-        console.log(this.monetizations);
       }
     };
 </script>

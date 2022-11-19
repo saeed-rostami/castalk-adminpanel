@@ -79,7 +79,7 @@
         </v-list-item>
 
 
-        <v-list-item link to="/auth" v-if="$auth.loggedIn">
+        <v-list-item link to="/profile" v-if="$auth.loggedIn">
           <v-list-item-content>
             <v-list-item-title class="text-h6">
              {{$auth.user.name}}
@@ -106,7 +106,7 @@
       :absolute="!fixed"
       app
     >
-      <v-img src="/icon.svg.svg" max-height="30" max-width="30"></v-img>
+      <v-img src="/icon.png" max-height="30" max-width="30"></v-img>
       <span class="castalk--text">Castalk App {{ new Date().getFullYear() }} </span>
     </v-footer>
   </v-app>
@@ -190,6 +190,28 @@
             icon: 'mdi-cart',
             title: 'Order',
             to: '/order'
+          },
+
+          {
+            icon: 'mdi-paper-roll',
+            title: 'Transaction',
+            to: '/transaction'
+          },
+
+          {
+            icon: 'mdi-wallet',
+            title: 'Wallet',
+            to: '/wallet'
+          },
+
+          {
+            icon: 'mdi-rss-box',
+            title: 'Feed',
+          },
+
+          {
+            icon: 'mdi-shield-search',
+            title: 'Explorer',
           },
         ],
         miniVariant: false,

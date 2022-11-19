@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   env: {
     baseUrl: "https://api.services.castalk.dyneemadev.com/api/admin/",
-    token : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLnNlcnZpY2VzLmNhc3RhbGsuZHluZWVtYWRldi5jb21cL2FwaVwvcmVzdFwvQWRtaW5cL0FkbWluTG9naW4iLCJpYXQiOjE2Njg1MjgwODAsImV4cCI6MTY2ODUzMTY4MCwibmJmIjoxNjY4NTI4MDgwLCJqdGkiOiJvZHpOUUpJSVZ4V2pwTWVZIiwic3ViIjowLCJwcnYiOiI2MDVmOGJiODgxOGZlZDRiNDExZjZmYmRjYWRlMjg3Y2QzNmU4MTAwIn0.wt8E7WbS_ogrlfNkJUsj0aMKxxJuD0LbR59tHt4i0uo"
+    auth_baseUrl: "https://auth.services.castalk.dyneemadev.com/trusted/admin/",
   },
   /*
   ** Nuxt rendering mode
