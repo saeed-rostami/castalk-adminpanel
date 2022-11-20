@@ -8,6 +8,8 @@
       app
     >
       <v-list>
+
+
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -207,11 +209,13 @@
           {
             icon: 'mdi-rss-box',
             title: 'Feed',
+            to: '/feed'
           },
 
           {
             icon: 'mdi-shield-search',
             title: 'Explorer',
+            to: '/explorer'
           },
         ],
         miniVariant: false,

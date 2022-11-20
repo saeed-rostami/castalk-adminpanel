@@ -6,6 +6,13 @@
     class="elevation-1"
   >
 
+    <template v-slot:item.avatar="{item}">
+      <v-avatar
+      >
+        <img :src="item.avatar" alt="alt">
+      </v-avatar>
+    </template>
+
 
     <template v-slot:top>
       <v-toolbar
@@ -141,12 +148,11 @@ export default {
         sortable: false,
         value: 'name',
       },
-      {text: '#', value: 'id'},
-      {text: 'Title', value: 'title'},
-      // {text: 'Cover', value: 'cover'},
-      {text: 'Financial Status', value: 'financial_status'},
-      {text: 'Explicit', value: 'is_adult'},
-      {text: 'Created At', value: 'created_at'},
+      // {text: '#', value: 'id'},
+      {text: 'Display Name', value: 'display_name'},
+      {text: 'Email', value: 'email'},
+      {text: 'User Name', value: 'username'},
+      {text: 'Avatar', value: 'avatar'},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
     editedIndex: -1,

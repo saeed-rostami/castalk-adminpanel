@@ -23,11 +23,7 @@
     },
 
     async fetch() {
-      const data = await this.$axios.$get(process.env.baseUrl + `EpisodeAdminPage/list`, {
-        headers: {
-          "authorization": process.env.token
-        }
-      });
+      const data = await this.$axios.$get(process.env.baseUrl + `EpisodeAdminPage/list`);
       this.episodes = data.data.data;
       console.log(this.episodes);
     }

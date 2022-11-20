@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="comments"
+    :items="coupons"
     sort-by="calories"
     class="elevation-1"
   >
@@ -11,7 +11,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Comments</v-toolbar-title>
+        <v-toolbar-title>coupons</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -24,16 +24,26 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              disabled
               outlined
               dark
               class="mb-2 castalk--text"
               v-bind="attrs"
               v-on="on"
             >
-              New Comment
+              New Coupon
             </v-btn>
+
           </template>
+
+
+            <v-btn
+              outlined
+              dark
+              class="mb-2 castalk--text"
+            >
+              New System Coupon
+            </v-btn>
+
           <v-card>
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
@@ -48,7 +58,7 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="editedItem.name"
+                      v-model="editedItem.title"
                       label="Dessert name"
                     ></v-text-field>
                   </v-col>
@@ -126,7 +136,7 @@
 <script>
 export default {
   props: {
-    comments: {
+    coupons: {
       required: true,
       type: Array,
     }
@@ -140,22 +150,32 @@ export default {
       {
         align: 'start',
         sortable: false,
-        // value: 'name',
+        value: 'name',
       },
       {text: '#', value: 'id'},
-      {text: 'Host Name', value: 'AuthorInfo.display_name'},
-      {text: 'Message', value: 'message'},
-      {text: 'Created At', value: 'created_at'},
+      {text: 'Name', value: 'name'},
+      {text: 'Coupon', value: 'coupon'},
+      {text: 'Coupon Owner', value: 'owner'},
+      {text: 'Amount', value: 'amount'},
+      {text: 'Total Count', value: 'total_count'},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
     editedIndex: -1,
     editedItem: {
-      name: '',
-      cover: '',
+      title: '',
+      iso: '',
+      nic_name: '',
+      iso3: '',
+      num_code: '',
+      is_active: '',
     },
     defaultItem: {
-      name: '',
-      cover: '',
+      title: '',
+      iso: '',
+      nic_name: '',
+      iso3: '',
+      num_code: '',
+      is_active: '',
     },
   }),
 
@@ -174,22 +194,26 @@ export default {
     },
   },
 
+  mounted () {
+    console.log(this.coupons);
+  },
+
   methods: {
 
     editItem (item) {
-      this.editedIndex = this.comments.indexOf(item)
+      this.editedIndex = this.coupons.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.comments.indexOf(item)
+      this.editedIndex = this.coupons.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     deleteItemConfirm () {
-      this.comments.splice(this.editedIndex, 1)
+      this.coupons.splice(this.editedIndex, 1)
       this.closeDelete()
     },
 
@@ -211,9 +235,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.comments[this.editedIndex], this.editedItem)
+        Object.assign(this.coupons[this.editedIndex], this.editedItem)
       } else {
-        this.comments.push(this.editedItem)
+        this.coupons.push(this.editedItem)
       }
       this.close()
     },

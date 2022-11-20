@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="comments"
+    :items="feeds"
     sort-by="calories"
     class="elevation-1"
   >
@@ -11,7 +11,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Comments</v-toolbar-title>
+        <v-toolbar-title>App Feed</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -31,7 +31,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Comment
+              New Badge
             </v-btn>
           </template>
           <v-card>
@@ -126,7 +126,7 @@
 <script>
 export default {
   props: {
-    comments: {
+    feeds: {
       required: true,
       type: Array,
     }
@@ -143,8 +143,9 @@ export default {
         // value: 'name',
       },
       {text: '#', value: 'id'},
-      {text: 'Host Name', value: 'AuthorInfo.display_name'},
-      {text: 'Message', value: 'message'},
+      {text: 'Host Name', value: 'user_info.display_name'},
+      {text: 'Host Email', value: 'user_info.email'},
+      {text: 'Status', value: 'status'},
       {text: 'Created At', value: 'created_at'},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
@@ -177,19 +178,19 @@ export default {
   methods: {
 
     editItem (item) {
-      this.editedIndex = this.comments.indexOf(item)
+      this.editedIndex = this.feeds.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.comments.indexOf(item)
+      this.editedIndex = this.feeds.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     deleteItemConfirm () {
-      this.comments.splice(this.editedIndex, 1)
+      this.feeds.splice(this.editedIndex, 1)
       this.closeDelete()
     },
 
@@ -211,9 +212,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.comments[this.editedIndex], this.editedItem)
+        Object.assign(this.feeds[this.editedIndex], this.editedItem)
       } else {
-        this.comments.push(this.editedItem)
+        this.feeds.push(this.editedItem)
       }
       this.close()
     },
