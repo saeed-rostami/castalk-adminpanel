@@ -9,7 +9,7 @@
     created() {
       // Notiflix.Loading.dots();
         Notiflix.Loading.dots({
-            svgColor: '#FFB800',
+            svgColor: '#1030ac',
         });
     },
     beforeDestroy() {

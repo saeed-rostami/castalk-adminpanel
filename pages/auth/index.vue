@@ -85,7 +85,7 @@
     methods: {
       async validate() {
         Notiflix.Loading.circle({
-          svgColor: '#FFB800',
+          svgColor: '#1030ac',
         });
         // this.$refs.form.validate()
         await this.$auth.loginWith("local", {

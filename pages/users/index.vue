@@ -1,8 +1,10 @@
 <template>
 <v-container>
+
   <PreLoading v-if="$fetchState.pending"/>
 
-  <OrderOrdersList v-bind:orders="orders"/>
+  <UserUsersList v-bind:users="users"/>
+
 </v-container>
 </template>
 
@@ -13,13 +15,13 @@ export default {
   components: {PreLoading},
   data() {
     return {
-      orders: []
+      users: []
     };
   },
 
   async fetch() {
-    const data = await this.$axios.$get(process.env.baseUrl+`OrderAdminPage/list`);
-    this.orders = data.data.data;
+    const data = await this.$axios.$get(process.env.baseUrl + `UsersAdminPage/list`);
+    this.users = data.data.data;
   }
 };
 </script>

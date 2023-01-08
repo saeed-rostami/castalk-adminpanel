@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="users"
+    :items="plans"
     sort-by="calories"
     class="elevation-1"
   >
@@ -33,7 +33,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Users</v-toolbar-title>
+        <v-toolbar-title>plans</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -52,7 +52,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New User
+              New Plan
             </v-btn>
           </template>
           <v-card>
@@ -69,8 +69,8 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="editedItem.username"
-                      label="Full Name"
+                      v-model="editedItem.name"
+                      label="Name"
                     ></v-text-field>
                   </v-col>
 
@@ -80,10 +80,22 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="editedItem.email"
-                      label="Email"
+                      v-model="editedItem.price"
+                      label="Price"
                     ></v-text-field>
                   </v-col>
+
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="editedItem.volume"
+                      label="Volume"
+                    ></v-text-field>
+                  </v-col>
+
 
 
                   <v-col
@@ -171,7 +183,7 @@ import Notiflix from "notiflix";
 
 export default {
   props: {
-    users: {
+    plans: {
       required: true,
       type: Array,
     }
@@ -182,27 +194,30 @@ export default {
 
 
     headers: [
-      {
-        align: 'start',
-        sortable: false,
-        value: 'name',
-      },
+      // {
+      //   align: 'start',
+      //   sortable: false,
+      //   value: 'name',
+      // },
       // {text: '#', value: 'id'},
-      {text: 'Full Name', value: 'username'},
-      {text: 'Email', value: 'email'},
+      {text: 'Name', value: 'name'},
+      {text: 'Price', value: 'price'},
+      {text: 'Volume', value: 'volume'},
       {text: 'Status', value: 'status'},
       {text: 'Registered_At', value: 'created_at_human'},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
     editedIndex: -1,
     editedItem: {
-      username: '',
-      email: '',
+      name: '',
+      price: '',
+      volume: '',
       status: '',
     },
     defaultItem: {
-      username: '',
-      email: '',
+      name: '',
+      price: '',
+      volume: '',
       status: '',
     },
   }),
@@ -223,29 +238,29 @@ export default {
   },
 
   mounted() {
-    console.log(this.users);
+    console.log(this.plans);
   },
 
   methods: {
 
     editItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.plans.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.plans.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     async deleteItemConfirm() {
-      const res = await this.$axios.$post(process.env.baseUrl + `UsersAdminPage/delete`,
-        {"user_id": this.editedItem.id});
+      const res = await this.$axios.$post(process.env.baseUrl + `PlanAdminPage/delete`,
+        {"plan_id": this.editedItem.id});
 
       if (res.code === 200) {
-        this.users.splice(this.editedIndex, 1);
+        this.plans.splice(this.editedIndex, 1);
         Notiflix.Report.success('Success', res.messages[0], 'OK');
       } else {
         Notiflix.Report.failure('Failed', res.messages[0], 'OK');
@@ -271,20 +286,19 @@ export default {
 
     async save() {
 
-
-
       if (this.editedIndex > -1) {
-        const res = await this.$axios.$post(process.env.baseUrl + `UsersAdminPage/update`,
+        const res = await this.$axios.$post(process.env.baseUrl + `PlanAdminPage/update`,
           {
-            "user_id": this.editedItem.id,
-            "email": this.editedItem.email,
-            "fullname": this.editedItem.username,
+            "plan_id": this.editedItem.id,
+            "name": this.editedItem.name,
+            "price": this.editedItem.price,
+            "volume": this.editedItem.volume,
             "status": this.editedItem.status ? 1 : 0,
           }
         )
           .then(res => {
             Notiflix.Report.success('Success', res.messages[0], 'OK');
-            Object.assign(this.users[this.editedIndex], this.editedItem);
+            Object.assign(this.plans[this.editedIndex], this.editedItem);
             console.log(this.editedItem.status);
 
           }).catch(({response}) => {
@@ -292,30 +306,34 @@ export default {
 
           });
       } else {
-        const res = await this.$axios.$post(process.env.baseUrl + `UsersAdminPage/create`,
+        const res = await this.$axios.$post(process.env.baseUrl + `PlanAdminPage/create`,
           {
-            "email": this.editedItem.email,
-            "fullname": this.editedItem.username,
+            "name": this.editedItem.name,
+            "price": this.editedItem.price,
+            "volume": this.editedItem.volume,
             "status": this.editedItem.status ? 1 : 0,
           }
         )
           .then(res => {
             Notiflix.Report.success('Success', res.messages[0], 'OK');
-            this.users.push(this.editedItem);
-
-            console.log(this.editedItem.status);
 
           }).catch(({response}) => {
             Notiflix.Report.failure("Failed", Object.values(response.data.errors)[0][0], 'OK');
 
           });
+        this.plans.push(this.editedItem);
       }
+
+
+
+
+
       this.close();
     },
 
 
     async show(item) {
-      await this.$router.push(`/users/${item.id}`);
+      await this.$router.push(`/plans/${item.id}`);
     },
 
     getStatusColor(status) {

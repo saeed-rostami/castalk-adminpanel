@@ -2,26 +2,24 @@
 <v-container>
   <PreLoading v-if="$fetchState.pending"/>
 
-  <CouponsList v-bind:coupons="coupons"/>
-
+  <OrderOrdersList v-bind:orders="orders"/>
 </v-container>
 </template>
 
 <script>
 import PreLoading from "@/components/UI/Preloading";
-import CouponsList from "@/components/Coupon/CouponsList";
 export default {
   name: "index",
-  components: {CouponsList, PreLoading},
+  components: {PreLoading},
   data() {
     return {
-      coupons: []
+      orders: []
     };
   },
 
   async fetch() {
-    const data = await this.$axios.$get(process.env.baseUrl+`PromotionAdminPage/list`);
-    this.coupons = data.data.data;
+    const data = await this.$axios.$get(process.env.baseUrl+`InvoiceAdminPage/list`);
+    this.orders = data.data.data;
   }
 };
 </script>

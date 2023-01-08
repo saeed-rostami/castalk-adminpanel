@@ -76,7 +76,7 @@
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+<!--            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>-->
           </v-list-item-avatar>
         </v-list-item>
 
@@ -108,7 +108,7 @@
       :absolute="!fixed"
       app
     >
-      <v-img src="/icon.png" max-height="30" max-width="30"></v-img>
+<!--      <v-img src="/icon.png" max-height="30" max-width="30"></v-img>-->
       <span class="castalk--text">Castalk App {{ new Date().getFullYear() }} </span>
     </v-footer>
   </v-app>
@@ -130,98 +130,29 @@
             to: '/'
           },
           {
-            icon: 'mdi-airport',
-            title: 'Country',
-            to: '/country'
+            icon: 'mdi-account',
+            title: 'Users',
+            to: '/users'
           },
           {
             icon: 'mdi-apps',
-            title: 'Category',
-            to: '/category'
+            title: 'Plans',
+            to: '/plans'
           },
 
           {
-            icon: 'mdi-play',
-            title: 'Podcast',
-            to: '/podcast'
+            icon: 'mdi-shopping',
+            title: 'Orders',
+            to: '/orders'
           },
 
-          {
-            icon: 'mdi-microphone',
-            title: 'Episode',
-            to: '/episode'
-          },
 
-          {
-            icon: 'mdi-cash-100',
-            title: 'Monetization',
-            to: '/monetization'
-          },
 
-          {
-            icon: 'mdi-check-circle',
-            title: 'Request Badges',
-            to: '/badge'
-          },
-
-          {
-            icon: 'mdi-youtube-subscription',
-            title: 'Subscription Plan',
-            to: '/subscription'
-          },
-
-          {
-            icon: 'mdi-account',
-            title: 'User',
-            to: '/user'
-          },
-
-          {
-            icon: 'mdi-comment',
-            title: 'Comment',
-            to: '/comment'
-          },
-
-          {
-            icon: 'mdi-sale',
-            title: 'Coupon',
-            to: '/coupon'
-          },
-
-          {
-            icon: 'mdi-cart',
-            title: 'Order',
-            to: '/order'
-          },
-
-          {
-            icon: 'mdi-paper-roll',
-            title: 'Transaction',
-            to: '/transaction'
-          },
-
-          {
-            icon: 'mdi-wallet',
-            title: 'Wallet',
-            to: '/wallet'
-          },
-
-          {
-            icon: 'mdi-rss-box',
-            title: 'Feed',
-            to: '/feed'
-          },
-
-          {
-            icon: 'mdi-shield-search',
-            title: 'Explorer',
-            to: '/explorer'
-          },
         ],
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Castalk',
+        title: 'Restorage',
 
 
       };

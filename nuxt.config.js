@@ -2,8 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   env: {
-    baseUrl: "https://api.services.castalk.dyneemadev.com/api/admin/",
-    auth_baseUrl: "https://auth.services.castalk.dyneemadev.com/trusted/admin/",
+    baseUrl: "https://api.restorage.io/api/admin/",
   },
   /*
   ** Nuxt rendering mode
@@ -84,7 +83,7 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
-          castalk : "#FFB800"
+          restorage : "#1030ac"
         }
       }
     }
@@ -97,7 +96,7 @@ export default {
   },
 
 
-  loading: {color: '#FFB800', duration: '5000', height: '4px'},
+  loading: {color: '#1030ac', duration: '5000', height: '4px'},
 
   router: {
     middleware: ['auth']
@@ -108,7 +107,7 @@ export default {
   auth: {
     redirect: {
       login: '/auth',
-      // user: '/',
+      // users: '/',
       logout: '/auth',
     },
 
@@ -126,9 +125,9 @@ export default {
           autoFetch: true
         },
         endpoints: {
-          login: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminLogin', method: 'post' , propertyName: 'data.access_token'},
-          logout: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminLogout', method: 'post' },
-          user: { url: 'https://api.services.castalk.dyneemadev.com/api/rest/Admin/AdminCurrent', method: 'get' , propertyName: 'data'}
+          login: { url: 'https://api.restorage.io/api/rest/Admin/AdminLogin', method: 'post' , propertyName: 'data.access_token'},
+          logout: { url: 'https://api.restorage.io/api/rest/Admin/AdminLogout', method: 'post' },
+          user: { url: 'https://api.restorage.io/api/rest/Admin/AdminCurrent', method: 'get' , propertyName: 'data'}
         },
       }
     }
